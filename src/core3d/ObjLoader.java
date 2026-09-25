@@ -173,6 +173,9 @@ public class ObjLoader {
         if (nome.equals("arvore.obj")) {
             return new ConfiguracaoObjeto(570, 390, -120, 130, 0);
         }
+        if (nome.equals("chao.obj")) {
+            return new ConfiguracaoObjeto(320, 390, 100, 700, 0);
+        }
 
 
         float x = 110.0f + (numeroObjeto % 3) * 210.0f;
