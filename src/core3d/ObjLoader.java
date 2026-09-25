@@ -174,7 +174,7 @@ public class ObjLoader {
             return new ConfiguracaoObjeto(570, 390, -120, 130, 0);
         }
         if (nome.equals("chao.obj")) {
-            return new ConfiguracaoObjeto(320, 390, 100, 700, 0);
+            return new ConfiguracaoObjeto(320, 390, -100, 900, 0);
         }
 
 
