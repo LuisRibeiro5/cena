@@ -11,15 +11,10 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.PropertyResourceBundle;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import core2d.Linha2D;
@@ -61,8 +56,6 @@ public class MainCanvas extends JPanel implements Runnable{
 	int Largura = 0;
 	int Altura = 0;
 	
-	BufferedImage imgtmp = null;
-	
 	float posx = 00;
 	float posy = 00;
 	
@@ -93,24 +86,6 @@ public class MainCanvas extends JPanel implements Runnable{
 	Mat4x4 modelview;
 	
 	public MainCanvas() {
-		
-		File f = new File("imgbmp.bmp");
-		try {
-			FileInputStream fin = new FileInputStream(f);
-
-			byte todosodbytes[] = new byte[64000];
-			int byteslidos = fin.read(todosodbytes);
-			System.out.println("Bytes Lidos "+byteslidos);
-			for(int i = 0; i < byteslidos;i++) {
-				System.out.println(i+": "+todosodbytes[i]);
-			}
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
-		
 		setSize(640,480);
 		setFocusable(true);
 		
@@ -118,20 +93,7 @@ public class MainCanvas extends JPanel implements Runnable{
 		Altura = 480;
 		
 		pixelSize = 640*480;
-		
-		
-//		try {
-//			imgtmp = ImageIO.read(getClass().getResource("fundo.jpg"));
-//			System.out.println(""+imgtmp.toString());
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
-		
-		imgtmp = loadImage("gato.jpg");
-		
 		imageBuffer = new BufferedImage(640,480, BufferedImage.TYPE_4BYTE_ABGR);
-		//imageBuffer.getGraphics().drawImage(imgtmp, 0, 0, null);
-		
 		
 		bufferDeVideo = ((DataBufferByte)imageBuffer.getRaster().getDataBuffer()).getData();
 		
@@ -734,21 +696,4 @@ public class MainCanvas extends JPanel implements Runnable{
 		}
 	}
 	
-	
-	public BufferedImage loadImage(String filename) {
-		try {
-			imgtmp = ImageIO.read(new File(filename));
-			
-			BufferedImage imgout = new BufferedImage(imgtmp.getWidth(), imgtmp.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
-			
-			imgout.getGraphics().drawImage(imgtmp, 0, 0, null);
-			
-			imgtmp = null;
-			
-			return imgout;
-		} catch (IOException e1) {
-			e1.printStackTrace();
-			return null;
-		}
-	}
 }
