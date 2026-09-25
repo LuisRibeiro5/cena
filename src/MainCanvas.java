@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import core2d.Linha2D;
 import core2d.Ponto2D;
+import core2d.Bresenham;
 import core3d.Mat4x4;
 import core3d.ObjLoader;
 import core3d.Ponto3D;
@@ -652,11 +653,15 @@ public class MainCanvas extends JPanel implements Runnable{
 		g.setColor(Color.red);
 		if(p0!=null) {
 			if(p1!=null) {
-				g.drawLine((int)p0.x,(int)p0.y,(int)p1.x,(int)p1.y);
-				g.drawLine((int)p0.x,(int)p0.y,(int)mouseX,(int)mouseY);
-				g.drawLine((int)p1.x,(int)p1.y,(int)mouseX,(int)mouseY);
+				Bresenham.desenha((Graphics2D) g, (int)p0.x, (int)p0.y,
+						(int)p1.x, (int)p1.y);
+				Bresenham.desenha((Graphics2D) g, (int)p0.x, (int)p0.y,
+						mouseX, mouseY);
+				Bresenham.desenha((Graphics2D) g, (int)p1.x, (int)p1.y,
+						mouseX, mouseY);
 			}else {
-				g.drawLine((int)p0.x,(int)p0.y,(int)mouseX,(int)mouseY);
+				Bresenham.desenha((Graphics2D) g, (int)p0.x, (int)p0.y,
+						mouseX, mouseY);
 			}
 		}
 

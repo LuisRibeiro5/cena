@@ -2,6 +2,8 @@ package core3d;
 
 import java.awt.Graphics2D;
 
+import core2d.Bresenham;
+
 public class Triangulo3D {
 	Ponto3D pa;
 	Ponto3D pb;
@@ -15,9 +17,9 @@ public class Triangulo3D {
 	
 	public void desenhase(Graphics2D dbg) {
 		
-		dbg.drawLine((int)pa.x,(int)pa.y,(int)pb.x,(int)pb.y);
-		dbg.drawLine((int)pb.x,(int)pb.y,(int)pc.x,(int)pc.y);
-		dbg.drawLine((int)pc.x,(int)pc.y,(int)pa.x,(int)pa.y);
+		Bresenham.desenha(dbg, (int)pa.x, (int)pa.y, (int)pb.x, (int)pb.y);
+		Bresenham.desenha(dbg, (int)pb.x, (int)pb.y, (int)pc.x, (int)pc.y);
+		Bresenham.desenha(dbg, (int)pc.x, (int)pc.y, (int)pa.x, (int)pa.y);
 	}
 	
 	public void desenhase(Graphics2D dbg, Mat4x4 modelview,Mat4x4 projection) {
@@ -29,9 +31,9 @@ public class Triangulo3D {
 		Ponto3D pb2 = projection.multiplicaPonto(pb1);
 		Ponto3D pc2 = projection.multiplicaPonto(pc1);
 		
-		dbg.drawLine((int)pa2.x,(int)pa2.y,(int)pb2.x,(int)pb2.y);
-		dbg.drawLine((int)pb2.x,(int)pb2.y,(int)pc2.x,(int)pc2.y);
-		dbg.drawLine((int)pc2.x,(int)pc2.y,(int)pa2.x,(int)pa2.y);
+		Bresenham.desenha(dbg, (int)pa2.x, (int)pa2.y, (int)pb2.x, (int)pb2.y);
+		Bresenham.desenha(dbg, (int)pb2.x, (int)pb2.y, (int)pc2.x, (int)pc2.y);
+		Bresenham.desenha(dbg, (int)pc2.x, (int)pc2.y, (int)pa2.x, (int)pa2.y);
 	}
 	
 	public void translacao(float a,float b, float c) {

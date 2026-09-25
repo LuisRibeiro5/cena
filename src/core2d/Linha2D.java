@@ -11,7 +11,8 @@ public class Linha2D {
 	}
 	
 	public void draw(Graphics g) {
-		g.drawLine((int)A.X,(int) A.Y,(int) B.X,(int) B.Y);
+		Bresenham.desenha((java.awt.Graphics2D) g,
+				(int) A.X, (int) A.Y, (int) B.X, (int) B.Y);
 	}
 	
 	public void translate(float x,float y) {
