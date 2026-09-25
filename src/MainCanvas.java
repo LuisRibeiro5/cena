@@ -63,6 +63,10 @@ public class MainCanvas extends JPanel implements Runnable{
 	boolean RIGHT = false;
 	boolean UP = false;
 	boolean DOWN = false;
+	boolean CAMERA_LEFT = false;
+	boolean CAMERA_RIGHT = false;
+	boolean CAMERA_UP = false;
+	boolean CAMERA_DOWN = false;
 	
 	float filtroR = 1;
 	float filtroG = 1;
@@ -123,6 +127,18 @@ public class MainCanvas extends JPanel implements Runnable{
 				if (key == KeyEvent.VK_D) {
 					RIGHT = false;
 				}
+				if (key == KeyEvent.VK_I) {
+					CAMERA_UP = false;
+				}
+				if (key == KeyEvent.VK_K) {
+					CAMERA_DOWN = false;
+				}
+				if (key == KeyEvent.VK_J) {
+					CAMERA_LEFT = false;
+				}
+				if (key == KeyEvent.VK_L) {
+					CAMERA_RIGHT = false;
+				}
 			}
 
 			@Override
@@ -140,6 +156,18 @@ public class MainCanvas extends JPanel implements Runnable{
 				}
 				if (key == KeyEvent.VK_D) {
 					RIGHT = true;
+				}
+				if (key == KeyEvent.VK_I) {
+					CAMERA_UP = true;
+				}
+				if (key == KeyEvent.VK_K) {
+					CAMERA_DOWN = true;
+				}
+				if (key == KeyEvent.VK_J) {
+					CAMERA_LEFT = true;
+				}
+				if (key == KeyEvent.VK_L) {
+					CAMERA_RIGHT = true;
 				}
 				if (key == KeyEvent.VK_Z) {
 					Mat4x4 matrot = new Mat4x4();
@@ -532,10 +560,12 @@ public class MainCanvas extends JPanel implements Runnable{
 		
 		timer+=diftime;
 		
-		if(UP || DOWN || LEFT || RIGHT) {
+		if(UP || DOWN || LEFT || RIGHT
+				|| CAMERA_UP || CAMERA_DOWN || CAMERA_LEFT || CAMERA_RIGHT) {
 			float passo = vel * difS;
 			float deslocamentoX = 0;
 			float deslocamentoY = 0;
+			float deslocamentoZ = 0;
 
 			if (UP) {
 				deslocamentoY -= passo;
@@ -549,9 +579,21 @@ public class MainCanvas extends JPanel implements Runnable{
 			if (RIGHT) {
 				deslocamentoX += passo;
 			}
+			if (CAMERA_UP) {
+				deslocamentoZ -= passo;
+			}
+			if (CAMERA_DOWN) {
+				deslocamentoZ += passo;
+			}
+			if (CAMERA_LEFT) {
+				deslocamentoX -= passo;
+			}
+			if (CAMERA_RIGHT) {
+				deslocamentoX += passo;
+			}
 
 			Mat4x4 matrot = new Mat4x4();
-			matrot.setTranslate(deslocamentoX, deslocamentoY, 0);
+			matrot.setTranslate(deslocamentoX, deslocamentoY, deslocamentoZ);
 	
 			Mat4x4 mr = modelview.multiplicaMatrizes(matrot,modelview);
 			modelview = mr;
